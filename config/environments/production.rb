@@ -46,6 +46,14 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
+  # https://devcenter.heroku.com/articles/getting-started-with-rails5#heroku-gems
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
+  end
+
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 

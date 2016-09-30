@@ -1,4 +1,4 @@
-require 'jwt'
+require 'json/jwt'
 
 class IdentityToken
   def initialize(user)

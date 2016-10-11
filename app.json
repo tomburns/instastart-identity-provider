@@ -3,7 +3,7 @@
   "description": "Basic identity provider to handle authentication with Layer",
   "website": "https://docs.layer.com/",
   "scripts": {
-    "postdeploy": "bundle exec rake db:create db:migrate db:seed"
+    "postdeploy": "bundle exec rake db:migrate db:seed"
   },
   "formation": {
     "web": {

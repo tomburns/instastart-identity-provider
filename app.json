@@ -6,7 +6,7 @@
     "LAYER_KEY_ID": {
       "description": "Your Layer key ID, which can be found in the 'Authentication Keys' section on the Keys page of the Layer Developer Dashboard",
       "required": true
-    }
+    },
     "LAYER_PROVIDER_ID": {
       "description": "Your Layer Provider ID, which can be found in the 'Provider ID' section of the Keys page of the Layer Developer Dashboard",
       "required": true

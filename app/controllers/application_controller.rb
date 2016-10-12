@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   def deployed
     render text: 'ok'
   end
+
+  def home
+    render text: 'home'
+  end
 end

@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   end
 
   def home
-    render text: 'home'
+    @key_id_set = !ENV['LAYER_KEY_ID'].blank?
+    @provider_id_set = !ENV['LAYER_PROVIDER_ID'].blank?
+    @private_key_set = !ENV['LAYER_PRIVATE_KEY'].blank?
+    # Renders app/views/application/home.html.erb by default
   end
 end

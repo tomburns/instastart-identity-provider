@@ -1,0 +1,21 @@
+<div id='users-content'>
+  <h1>New user</h1>
+  <%= form_for(User.new) do |f| %>
+    <%= f.label :email %>
+    <%= f.email_field :email, placeholder: 'user@example.com' %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, placeholder: 'Pick something secure' %>
+
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name, value: '', placeholder: 'User name' %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, placeholder: 'User' %>
+
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, placeholder: 'Name' %>
+
+    <%= f.submit 'Create user' %>
+  <% end %>
+</div>

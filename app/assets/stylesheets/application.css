@@ -18,11 +18,11 @@
    height: 100%;
  }
  body {
-   align-items: center;
    color: #444;
-   display: flex;
    font-family: 'Raleway', sans-serif;
    font-weight: 400;
-   justify-content: center;
    line-height: 1.5em;
+ }
+ th {
+  text-align: left;
  }

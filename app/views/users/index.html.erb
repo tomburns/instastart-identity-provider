@@ -1,0 +1,15 @@
+<div id='users-content'>
+  <table>
+    <tr><th>ID</th> <th>Email</th> <th>First name</th> <th>Last name</th> <th>Display name</th></tr>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to(user.id, user_path(user)) %></td>
+      <td><%= user.email %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.display_name %></td>
+    </tr>
+    <% end %>
+  </table>
+  <p><%= link_to('Create user', new_user_path) %></p>
+</div>

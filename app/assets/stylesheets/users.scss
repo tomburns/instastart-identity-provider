@@ -1,0 +1,18 @@
+#users-content {
+  margin: auto;
+  width: 800px;
+  table {
+    width: 100%;
+  }
+  label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 0.5rem 0 0 0;
+  }
+  input {
+    display: block;
+    margin: 0.25rem 0 0.75rem 0;
+    padding: 0.25em;
+  }
+}

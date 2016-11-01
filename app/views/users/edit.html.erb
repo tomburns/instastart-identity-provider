@@ -1,0 +1,22 @@
+<div id='users-content'>
+  <%= form_for(@user) do |f| %>
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+
+    <%= f.submit 'Save changes' %>
+  <% end %>
+
+  <h2>Change Password</h2>
+  <%= form_for(@user) do |f| %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.submit 'Change password' %>
+  <% end %>
+</div>

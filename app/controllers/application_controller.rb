@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   after_filter :set_cors_access_control_headers
 
   def deployed
-    render text: 'ok'
+    render plain: 'ok'
   end
 
   def home
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
       headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = '*'
-      render text: ''
+      render plain: ''
     end
   end
 

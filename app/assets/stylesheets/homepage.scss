@@ -12,9 +12,10 @@
   padding: 1em;
   width: 600px;
   h1 {
-    color: #888;
+    color: #19a5e4;
     font-size: 3rem;
     font-weight: 200;
+    line-height: 3rem;
   }
 }
 
@@ -22,10 +23,18 @@
   display: flex;
   div {
     box-sizing: border-box;
-    width: 50%;
     &:first-child {
       margin-right: 1em;
     }
+  }
+  #status {
+    flex: 3;
+  }
+  #resources {
+    flex: 5;
+  }
+  #next {
+    flex: 2;
   }
   h2 {
     font-size: 1.2rem;

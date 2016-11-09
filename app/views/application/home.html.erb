@@ -3,17 +3,21 @@
     <h1>Deploy successful!</h1>
     <p>If you've just deployed this app from the Quick Start, copy the URL of this page and paste it on the Quick Start page to download your customized apps.</p>
     <div id='details'>
-      <div>
-        <h2>Configuration Status</h2>
+      <div id='status'>
+        <h2>Status</h2>
         <p>Key ID set: <%= @key_id_set %></p>
         <p>Provider ID set: <%= @provider_id_set %></p>
         <p>Private key set: <%= @private_key_set %></p>
       </div>
-      <div>
+      <div id='resources'>
         <h2>Resources</h2>
         <p><a href='https://docs.layer.com/sdk/ios/introduction#2-user-management-identity-provider'>What does an identity provider do?</a></p>
         <p><a href='#'>Authenticating users</a></p>
         <p><a href='https://developer.layer.com'>Layer Developer Dashboard</a></p>
+      </div>
+      <div id='next'>
+        <h2>Next step</h2>
+        <a href='/users' class='button primary'>Register users</a>
       </div>
     </div>
   </div>

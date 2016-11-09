@@ -17,12 +17,34 @@
  html,body {
    height: 100%;
  }
+ a {
+  color: #19a5e4;
+ }
  body {
-   color: #444;
-   font-family: 'Raleway', sans-serif;
+   color: #555;
+   font-family: 'Open Sans', sans-serif;
    font-weight: 400;
    line-height: 1.5em;
  }
+ h1, h2, h3 {
+  font-family: 'Raleway';
+ }
  th {
   text-align: left;
+ }
+
+ button.primary, a.button.primary, input[type="submit"] {
+  background: #19a5e4;
+  border: none;
+  border-radius: 0.2rem;
+  color: white;
+  display: inline-block;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.7rem;
+  text-decoration: none;
+  transition: background 0.25s;
+  -webkit-appearance: none;
+  &:hover {
+    background: lighten(#19a5e4, 8%);
+  }
  }

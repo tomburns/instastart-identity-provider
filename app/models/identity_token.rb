@@ -1,12 +1,15 @@
 require 'json/jwt'
 
 class IdentityToken
-  def initialize(user)
-    @user = user
+  attr_reader :user_id, :nonce
+
+  def initialize(user_id, nonce)
+    @user_id = user_id
+    @nonce = nonce
   end
 
-  def for_nonce(nonce)
-    jwt = JSON::JWT.new(claim_for_nonce(nonce))
+  def to_s
+    jwt = JSON::JWT.new(claim)
     jwt.header['typ'] = 'JWT'
     jwt.header['cty'] = 'layer-eit;v=1'
     jwt.header['kid'] = layer_key_id
@@ -26,10 +29,10 @@ class IdentityToken
     ENV['LAYER_KEY_ID']
   end
 
-  def claim_for_nonce(nonce)
+  def claim
     {
       iss: layer_provider_id,
-      prn: @user.id.to_s,
+      prn: user_id.to_s,
       iat: Time.now.to_i,
       exp: default_token_expiration.to_i,
       nce: nonce

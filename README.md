@@ -2,7 +2,7 @@
 
 Stuff you should know:
 
-* This can be deployed to Heroku. [Click this link](https://heroku.com/deploy?template=https://github.com/layerhq/quickstart-identity-provider/tree/master&env[LAYER_KEY_ID]=blahblah-blah-blah-blahblah&env[LAYER_PROVIDER_ID]=bacon) and fill in the correct env variables. The deploy is configured in [`app.json`](blob/master/app.json); schema [documented here](https://devcenter.heroku.com/articles/app-json-schema)
+* This can be deployed to Heroku. [Click this link](https://heroku.com/deploy?template=https://github.com/layerhq/instastart-identity-provider/tree/master&env[LAYER_KEY_ID]=blahblah-blah-blah-blahblah&env[LAYER_PROVIDER_ID]=bacon) and fill in the correct env variables. The deploy is configured in [`app.json`](blob/master/app.json); schema [documented here](https://devcenter.heroku.com/articles/app-json-schema)
 * Upon deploy, the database will be [seeded with these values](blob/master/db/seeds.rb)
 * `GET /deployed` should render the string `"ok"` and HTTP status `200` as a health check
 * `GET /users` returns a JSON object: `{"users": [<user>,<user>,…]}`, where each `<user>` has an `id`, `email`, `first_name`, `last_name`, `display_name`, and `avatar_url` field (all strings)

@@ -32,7 +32,11 @@ class IdentityToken
       prn: @user.id.to_s,
       iat: Time.now.to_i,
       exp: default_token_expiration.to_i,
-      nce: nonce
+      nce: nonce,
+      first_name: @user.first_name,
+      last_name: @user.last_name,
+      display_name: @user.display_name,
+      avatar_url: @user.avatar_url
     }
   end
 

@@ -10,8 +10,8 @@ class IdentityTokenGenerator
     @private_key = OpenSSL::PKey::RSA.new(private_key)
   end
 
-  def generate_token(user_id, nonce, expires_at = 24.hours.from_now)
-    claim = identity_claim(user_id, nonce, expires_at)
+  def generate_token(user, nonce, expires_at = 24.hours.from_now)
+    claim = identity_claim(user, nonce, expires_at)
     jwt = JSON::JWT.new(claim)
     jwt.header['typ'] = 'JWT'
     jwt.header['cty'] = 'layer-eit;v=1'
@@ -20,13 +20,17 @@ class IdentityTokenGenerator
   end
 
   private
-  def identity_claim(user_id, nonce, expires_at)
+  def identity_claim(user, nonce, expires_at)
     {
       iss: provider_id,
-      prn: user_id.to_s,
+      prn: user.id.to_s,
       iat: Time.now.to_i,
       exp: expires_at.to_i,
-      nce: nonce
+      nce: nonce,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      display_name: user.display_name,
+      avatar_url: user.avatar_url
     }
   end
 end

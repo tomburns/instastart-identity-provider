@@ -11,6 +11,6 @@ class AuthenticationController < ApplicationController
 
   private
   def identity_token_generator
-    IdentityTokenGenerator.new(layer_provider_id, layer_key_id, layer_private_key)
+    @identity_token_generator ||= IdentityTokenGenerator.new(layer_provider_id, layer_key_id, layer_private_key)
   end
 end

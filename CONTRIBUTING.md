@@ -1,0 +1,7 @@
+We're excited that you're thinking about contributing to this repo! A few guidelines to keep in mind:
+
+* This is a _sample app_ that will be used by lots of developers new to Layer. These developers span dozens of industries and hundreds of use cases. As a result, new features should be broadly useful to a large number of developers.
+* Similarly, this app shouldn't include "kitchen-sink" features. For example, it shouldn't include an extensive, custom UI for user management (such as [Active Admin](http://activeadmin.info)). While such features may be nice, they introduce conceptual complexity that isn't directly related to being an identity provider. That makes it harder for new developers to get familiar with this app, and introduces more work in case someone wants to remove or modify that custom feature.
+* If you'd like to work on a new feature but are unsure if it makes sense to include in this sample, feel free to ask! However, note that at the moment we are unable to take _requests_ for new features.
+* PRs for bug fixes and new features that make sense are always welcomed. Please make sure all tests pass by running `rails test`, and be sure to include tests for your changes as well.
+* You are always welcome to fork this repo and make any changes you'd like. You aren't obligated to make a PR back to this repo with your changes.

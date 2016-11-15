@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string           not null
+#  password_digest :string           not null
+#  first_name      :string
+#  last_name       :string
+#  display_name    :string
+#  avatar_url      :string
+#
+
 class User < ActiveRecord::Base
   has_secure_password
   after_initialize :set_display_name

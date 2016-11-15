@@ -2,7 +2,6 @@ require 'json/jwt'
 
 class IdentityTokenGenerator
   attr_reader :provider_id, :key_id, :private_key
-  attr_accessor :lifetime
 
   def initialize(provider_id, key_id, private_key)
     @provider_id = provider_id

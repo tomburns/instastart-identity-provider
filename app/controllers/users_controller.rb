@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     find_user
     if @user.update_attributes(user_params)
-      render 'show'
+      redirect_to @user
     else
       render text: 'Error updating user fields'
     end

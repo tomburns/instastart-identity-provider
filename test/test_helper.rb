@@ -7,4 +7,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  private
+  def base_user_params
+    @base_user_params ||= {email: 'test@layer.com', password: 'test'}
+  end
 end

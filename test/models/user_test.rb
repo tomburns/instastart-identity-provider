@@ -53,9 +53,4 @@ class UserTest < ActiveSupport::TestCase
     user = User.create(base_user_params)
     assert_equal '<User>', user.display_name
   end
-
-  private
-  def base_user_params
-    @base_user_params ||= {email: 'test@layer.com', password: 'test'}
-  end
 end

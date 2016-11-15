@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   after_initialize :set_display_name
 
   def as_json(options = {})
-    super(options).except(:password_digest)
+    super(options).except("password_digest")
   end
 
   private
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     elsif last_name
       last_name
     else
-      "<User #{id}>"
+      "<User>"
     end
   end
 end

@@ -1,33 +1,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  before_filter :set_cors_preflight_headers
-  after_filter :set_cors_access_control_headers
+  memoize :layer_key_id, :layer_provider_id, :layer_private_key
+  helper_method :layer_key_id, :layer_provider_id, :layer_private_key
 
   def deployed
     render plain: 'ok'
   end
 
   def home
-    @key_id_set = !ENV['LAYER_KEY_ID'].blank?
-    @provider_id_set = !ENV['LAYER_PROVIDER_ID'].blank?
-    @private_key_set = !ENV['LAYER_PRIVATE_KEY'].blank?
     # Renders app/views/application/home.html.erb by default
   end
 
-  def set_cors_preflight_headers
-    if request.method == :options
-      headers['Access-Control-Allow-Origin'] = '*'
-      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-      headers['Access-Control-Request-Method'] = '*'
-      headers['Access-Control-Allow-Headers'] = '*'
-      render plain: ''
-    end
+  protected
+  def layer_key_id
+    ENV['LAYER_KEY_ID']
   end
 
-  def set_cors_access_control_headers
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-    headers['Access-Control-Request-Method'] = '*'
-    headers['Access-Control-Allow-Headers'] = '*'
+  def layer_provider_id
+    ENV['LAYER_PROVIDER_ID']
+  end
+
+  def layer_private_key
+    ENV['LAYER_PRIVATE_KEY'] || File.read(ENV['LAYER_PRIVATE_KEY_PATH'])
   end
 end

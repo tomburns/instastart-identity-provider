@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   def layer_private_key
-    @@layer_private_key ||= (ENV['LAYER_PRIVATE_KEY'] || File.read(ENV['LAYER_PRIVATE_KEY_PATH']))
+    @@layer_private_key ||= (ENV['LAYER_PRIVATE_KEY'] || (keypath = ENV['LAYER_PRIVATE_KEY_PATH'] && File.read(keypath)))
   end
 end

@@ -1,5 +1,8 @@
 <div id='users-content'>
   <p><%= link_to '← All users', users_path %></p>
   <h1><%= @user.display_name %></h1>
+  <% if @user.admin? %>
+  <p>This user is an admin</p>
+  <% end %>
   <p><%= link_to 'Edit', edit_user_path(@user) %></p>
 </div>

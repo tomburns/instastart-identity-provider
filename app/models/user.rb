@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     super(options).except("password_digest")
   end
 
+  def admin?
+    is_admin
+  end
+
   private
   def set_display_name
     self.display_name ||= if first_name && last_name

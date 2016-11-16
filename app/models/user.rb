@@ -9,6 +9,7 @@
 #  last_name       :string
 #  display_name    :string
 #  avatar_url      :string
+#  is_admin        :boolean
 #
 
 class User < ActiveRecord::Base

@@ -12,7 +12,7 @@
       "required": true
     },
     "LAYER_PRIVATE_KEY": {
-      "description": "Contents of your RSA private key, included in the ZIP downloaded from Instastart or generated from the Keys page of the Layer Developer Dashboard",
+      "description": "Contents of your RSA private key, generated on the Instastart page or from the Keys page of the Layer Developer Dashboard",
       "required": true
     }
   },

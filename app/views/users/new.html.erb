@@ -17,6 +17,9 @@
     <%= f.text_field :last_name, placeholder: 'Name' %>
 
     <%= f.check_box :is_admin, checked: @force_admin, disabled: @force_admin %> <%= f.label :is_admin, disabled: @force_admin %>
+    <% if @force_admin %>
+      <p id='force-admin-prompt'><small>The first user you create must be an admin user</small></p>
+    <% end %>
 
     <div id='save_new_user'>
       <%= f.submit 'Save new user' %>

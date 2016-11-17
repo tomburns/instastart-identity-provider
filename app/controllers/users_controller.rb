@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :check_login, except: [:create]
-  before_action :check_create, only: [:create]
+  before_action :check_login, except: [:new, :create]
+  before_action :check_create, only: [:new, :create]
 
   def index
     @users = User.all.order(id: :asc)

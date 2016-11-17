@@ -4,22 +4,14 @@
   table {
     width: 100%;
   }
-  label {
-    display: block;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin: 0.5rem 0 0 0;
+  input[type="checkbox"] + label {
+    display: inline-block;
   }
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    border: 1px solid #CCC;
-    border-radius: 0.2rem;
-    display: block;
-    font-size: 1rem;
-    line-height: 1.5em;
-    margin: 0.25rem 0 0.75rem 0;
-    padding: 0.5em;
+  #user_last_name {
+    margin-bottom: 0
+  }
+  #save_new_user {
+    margin: 1rem 0;
   }
   #cancel-new-user {
     display: inline-block;

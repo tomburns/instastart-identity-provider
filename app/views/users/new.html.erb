@@ -16,7 +16,11 @@
     <%= f.label :last_name %>
     <%= f.text_field :last_name, placeholder: 'Name' %>
 
-    <%= f.submit 'Save new user' %>
-    <span id='cancel-new-user'><%= link_to('Cancel', users_path) %></span>
+    <%= f.check_box :is_admin, checked: @force_admin, disabled: @force_admin %> <%= f.label :is_admin, disabled: @force_admin %>
+
+    <div id='save_new_user'>
+      <%= f.submit 'Save new user' %>
+      <span id='cancel-new-user'><%= link_to('Cancel', users_path) %></span>
+    </div>
   <% end %>
 </div>

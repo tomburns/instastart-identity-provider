@@ -47,6 +47,7 @@ GEM
     builder (3.2.2)
     byebug (9.0.6)
     concurrent-ruby (1.0.2)
+    database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -169,6 +170,7 @@ DEPENDENCIES
   annotate
   bcrypt (~> 3.1.7)
   byebug
+  database_cleaner
   jbuilder (~> 2.5)
   jquery-rails
   json-jwt (~> 1.6.5)

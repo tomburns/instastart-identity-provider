@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   match '/deployed', to: 'application#deployed', via: [:get, :options]
 
   resources :users
+  resources :sessions, only: [:new, :create]
+  get '/login', to: 'sessions#new', as: :login
+  get '/logout', to: 'sessions#destroy'
 
   root to: 'application#home'
 end

@@ -9,6 +9,6 @@ class AuthenticationRequest
   end
 
   def valid?
-    user.authenticate(@password)
+    user && user.authenticate(@password)
   end
 end

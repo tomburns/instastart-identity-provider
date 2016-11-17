@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
+  before_action :check_login, except: [:create]
+  before_action :check_create, only: [:create]
+
   def index
-    @users = User.all
+    @users = User.all.order(id: :asc)
     respond_to do |format|
       format.html
       format.json { render json: { users: @users } }
     end
+  end
+
+  include UsersHelper
+  def new
+    @force_admin = !app_has_admin?
   end
 
   def show
@@ -16,7 +24,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    params = user_params
+    # Force admin creation if app currently doesn't have an admin
+    params = params.merge(is_admin: true) unless app_has_admin?
+    @user = User.create(params)
     redirect_to @user
   end
 
@@ -39,6 +50,25 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :display_name, :first_name, :last_name, :password)
+    params.require(:user).permit(:email, :display_name, :first_name, :last_name, :password, :is_admin)
+  end
+
+  include SessionsHelper
+  def check_login
+    if valid_session?
+      true
+    elsif app_has_admin?
+      redirect_to(login_path)
+    else
+      redirect_to(new_user_path)
+    end
+  end
+
+  def check_create
+    if valid_session? || !app_has_admin?
+      true
+    else
+      redirect_to(login_path)
+    end
   end
 end

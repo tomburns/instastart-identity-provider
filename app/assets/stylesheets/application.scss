@@ -68,3 +68,22 @@ form {
     padding: 0.5em;
   }
 }
+
+header {
+  background: #EEE;
+  border: 1px solid #DDD;
+  margin: 1rem;
+  padding: 1rem;
+  #sample-disclaimer {
+    display: inline-block;
+    margin: 0;
+    width: 70%;
+  }
+  #auth-link {
+    display: inline-block;
+    float: right;
+    margin: 0;
+    text-align: right;
+    width: 30%;
+  }
+}

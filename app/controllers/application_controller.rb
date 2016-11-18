@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
     render plain: 'ok'
   end
 
+  include SessionsHelper
   def home
+    @valid_session = valid_session?
     # Renders app/views/application/home.html.erb by default
   end
 

@@ -27,7 +27,9 @@ A few [HTTP routes](config/routes.rb) are specified:
 
 ## User Authentication
 
-The `POST /authenticate` endpoint expects three parameters: `email`, `password`, and `nonce`. This models a typical email-and-password login in an app. The `email` should correspond to an existing record in the `users` table. The `password` will be hashed ([using bcrypt](http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password)) and checked against the `password_digest` field of that user record. If they match, the Identity Provider will use the provided `nonce` to generate an [identity token](https://docs.layer.com/sdk/ios/authentication#identity-token) (the Identity Provider does not verify that the `nonce` is well-formed or valid). The identity token will be returned as a string in the HTTP response. If the email and password don't match, the endpoint will return an `error` string and HTTP status `401`.
+The `POST /authenticate` endpoint expects three parameters: `email`, `password`, and `nonce`. This models a typical email-and-password login in an app. The `email` should correspond to an existing record in the `users` table. The `password` will be hashed ([using bcrypt](http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password)) and checked against the `password_digest` field of that user record. If they match, the Identity Provider will use the provided `nonce` to generate an [identity token](https://docs.layer.com/sdk/ios/authentication#identity-token) (the Identity Provider does not verify that the `nonce` is well-formed or valid). 
+
+If the email and password are valid, the response looks like `{"identity_token": "<IDENTITY TOKEN AS A STRING>"}`. If not, the response will be `{"error": "<A DESCRIPTION OF THE ERROR>"}` and HTTP status `401`. 
 
 # Deployment
 

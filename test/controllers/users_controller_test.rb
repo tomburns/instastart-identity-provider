@@ -107,7 +107,7 @@ class UsersControllerAuthenticatedTest < ActionDispatch::IntegrationTest
 
   test 'POST /users redirects to newly created user' do
     post '/users', { params: { user: base_user_params }, headers: @auth_header}
-    assert_redirected_to user_path(User.last)
+    assert_redirected_to user_path(User.find_by_email(base_user_params[:email]))
   end
 
   test 'GET /users/:id/edit renders users#edit' do

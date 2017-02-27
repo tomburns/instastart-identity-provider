@@ -97,7 +97,7 @@ class UsersControllerAuthenticatedTest < ActionDispatch::IntegrationTest
     admin_user = User.create(admin_user_params)
     new_user_params = base_user_params.merge(email: 'other@example.com', is_admin: false)
     post '/users', { params: { user: new_user_params }, headers: @auth_header }
-    assert_not User.last.admin?
+    assert_not User.find_by_email('other@example.com').admin?
   end
 
   test 'POST /users creates an admin if requested' do

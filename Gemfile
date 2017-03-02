@@ -27,6 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'json-jwt', '~> 1.6.5'
 gem 'rack-cors', require: 'rack/cors'
+gem 'httparty', '0.14.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

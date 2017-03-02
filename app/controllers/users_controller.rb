@@ -1,3 +1,5 @@
+require "#{Rails.root}/lib/server_api"
+
 class UsersController < ApplicationController
   before_action :check_login, except: [:new, :create]
   before_action :check_create, only: [:new, :create]
@@ -28,6 +30,7 @@ class UsersController < ApplicationController
     # Force admin creation if app currently doesn't have an admin
     params = params.merge(is_admin: true) unless app_has_admin?
     @user = User.create(params)
+    ServerAPI.new.create_identity(@user.id, @user.as_identity)
     redirect_to @user
   end
 

@@ -14,6 +14,14 @@
     "LAYER_PRIVATE_KEY": {
       "description": "Contents of your RSA private key, generated on the Instastart page or from the Keys page of the Layer Developer Dashboard",
       "required": true
+    },
+    "LAYER_APP_ID": {
+      "description": "Your Layer app ID, which can be found in the 'Keys' section of the Layer Developer Dashboard",
+      "required": true
+    },
+    "LAYER_SERVER_API_TOKEN": {
+      "description": "Your Layer Server API Bearer token, which can be found in the 'Server API' section of the Layer Developer Dashboard",
+      "required": true
     }
   },
   "scripts": {

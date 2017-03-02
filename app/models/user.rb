@@ -20,6 +20,17 @@ class User < ActiveRecord::Base
     super(options).except("password_digest")
   end
 
+  def as_identity
+    # https://docs.layer.com/reference/server_api/identities.out#create-identity
+    {
+      display_name: self.display_name,
+      avatar_url: self.avatar_url,
+      first_name: self.first_name,
+      last_name: self.last_name,
+      email_address: self.email
+    }.delete_if { |_, value| value.blank? }
+  end
+
   def admin?
     is_admin
   end

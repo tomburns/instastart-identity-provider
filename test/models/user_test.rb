@@ -54,4 +54,23 @@ class UserTest < ActiveSupport::TestCase
     user = User.create(base_user_params)
     assert_equal '<User>', user.display_name
   end
+
+  test '#as_identity includes identity fields that Layer supports' do
+    user = User.create(base_user_params.merge(first_name: 'Test', last_name: 'Layer', display_name: 'Layer Test', avatar_url: 'example.com/img'))
+    identity = user.as_identity
+    assert_equal 'test@layer.com', identity[:email_address]
+    assert_equal 'Test', identity[:first_name]
+    assert_equal 'Layer', identity[:last_name]
+    assert_equal 'Layer Test', identity[:display_name]
+    assert_equal 'example.com/img', identity[:avatar_url]
+  end
+
+  test '#as_identity does not include fields that have not been provided' do
+    user = User.create(base_user_params)
+    identity = user.as_identity
+    assert_nil identity["first_name"]
+    assert_nil identity["last_name"]
+    assert_nil identity["display_name"]
+    assert_nil identity["avatar_url"]
+  end
 end

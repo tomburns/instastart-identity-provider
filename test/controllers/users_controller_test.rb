@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class UsersControllerUnauthenticatedTest < ActionDispatch::IntegrationTest
+  setup do
+    stub_request(:post, /api.layer.com/)
+      .to_return(status: 200, body: "")
+  end
   # App currently does not have an admin user registered
   test 'GET /users redirects to new user page' do
     get '/users'
@@ -72,6 +76,8 @@ class UsersControllerAuthenticatedTest < ActionDispatch::IntegrationTest
   setup do
     token = authenticated_session.token
     @auth_header = { 'HTTP_COOKIE' => "session_token=#{token};" }
+    stub_request(:post, /api.layer.com/)
+      .to_return(status: 200, body: "")
   end
 
   test 'GET /users renders users#index' do
@@ -91,6 +97,21 @@ class UsersControllerAuthenticatedTest < ActionDispatch::IntegrationTest
     after_count = User.count
     assert_equal (before_count + 1), after_count
     assert_equal base_user_params[:email], User.last.email
+  end
+
+  test "POST /users calls Layer's Server API to create an Identity" do
+    post '/users', { params: { user: base_user_params }, headers: @auth_header }
+    assert_requested :post, /api.layer.com\/apps\/.+\/users\/.+\/identity/,
+      headers: {
+        'Accept' => 'application/vnd.layer+json; version=2.0',
+        'Content-Type' => 'application/json',
+        'Authorization' => /Bearer .+/
+      },
+      body: {
+        display_name: '<User>',
+        email_address: base_user_params[:email]
+      }.to_json,
+      times: 1
   end
 
   test 'POST /users creates a non-admin user if an admin exists and the user is created as a non-admin' do

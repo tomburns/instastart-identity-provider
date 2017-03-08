@@ -9,6 +9,13 @@ class AuthenticationControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil JSON.parse(@response.body)['identity_token']
   end
 
+  test 'POST /authenticate works when credentials are nested inside :user in request params' do
+    User.create(base_user_params)
+    post "/authenticate", params: { user: { email: base_user_params[:email], password: base_user_params[:password]}, nonce: 'test_nonce' }
+    assert_response :success
+    assert_not_nil JSON.parse(@response.body)['identity_token']
+  end
+
   test 'POST /authenticate renders an error when provided with invalid credentials' do
     User.create(base_user_params)
     post "/authenticate", params: { email: base_user_params[:email], password: 'wrong_password', nonce: 'test_nonce' }

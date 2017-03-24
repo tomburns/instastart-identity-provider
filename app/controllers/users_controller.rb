@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :display_name, :first_name, :last_name, :password, :is_admin)
+    params.require(:user).permit(:email, :display_name, :first_name, :last_name, :avatar_url, :password, :is_admin)
   end
 
   include SessionsHelper

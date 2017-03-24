@@ -16,6 +16,9 @@
     <%= f.label :last_name %>
     <%= f.text_field :last_name, placeholder: 'Name' %>
 
+    <%= f.label :avatar_url %>
+    <%= f.text_field :avatar_url, placeholder: 'https://example.com/avatar.jpg' %>
+
     <%= f.check_box :is_admin, checked: @force_admin, disabled: @force_admin %> <%= f.label :is_admin, disabled: @force_admin %>
     <% if @force_admin %>
       <p id='force-admin-prompt'><small>The first user you create must be an admin user</small></p>

@@ -114,6 +114,26 @@ class UsersControllerAuthenticatedTest < ActionDispatch::IntegrationTest
       times: 1
   end
 
+  test "POST /users automatically follows other users if there are only a few users in the database" do
+    user_1 = User.create(base_user_params.merge(email: 'user1@example.com'))
+    post '/users', { params: { user: base_user_params }, headers: @auth_header }
+    new_user_id = User.find_by(email: base_user_params[:email]).id
+    assert_requested :post, Regexp.new("api.layer.com\/apps\/.+\/users\/#{new_user_id}/following/users"),
+      headers: {
+        'Accept' => 'application/vnd.layer+json; version=2.0',
+        'Content-Type' => 'application/json',
+        'Authorization' => /Bearer .+/
+      },
+      body: User.all.pluck(:id).reject{ |id| id == new_user_id }.to_json,
+      times: 1
+  end
+
+  test "POST /users does not automatically follow other users if there a lot of users in the database" do
+    100.times { |i| User.create(base_user_params.merge(email: "user#{i}@example.com")) }
+    post '/users', { params: { user: base_user_params }, headers: @auth_header }
+    assert_not_requested :post, /api.layer.com\/apps\/.+\/users\/.+\/following\/users/
+  end
+
   test 'POST /users creates a non-admin user if an admin exists and the user is created as a non-admin' do
     admin_user = User.create(admin_user_params)
     new_user_params = base_user_params.merge(email: 'other@example.com', is_admin: false)

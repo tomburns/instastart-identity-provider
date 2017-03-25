@@ -13,6 +13,8 @@ Out of the box, this Identity Provider does three things:
 * [Connects to a database](config/database.yml) and [sets up a `users` table](db/migrate/20160930212656_create_users.rb) to store your list of users
 * [Provides a basic UI](app/controllers/users_controller.rb) to view, create, and edit user entries in your database
 * [Accepts authentication requests](app/controllers/authentication_controller.rb) from Layer sample apps and responds with with an _identity token_
+* Automatically creates [an identity](https://docs.layer.com/reference/server_api/identities.out) when a User record is created
+* Automatically [follows](https://docs.layer.com/reference/server_api/identities.out#following-a-user) other users when a new User record is created (only applies to first 10 created users by default)
 
 A few [HTTP routes](config/routes.rb) are specified:
 
@@ -27,9 +29,9 @@ A few [HTTP routes](config/routes.rb) are specified:
 
 ## User Authentication
 
-The `POST /authenticate` endpoint expects three parameters: `email`, `password`, and `nonce`. This models a typical email-and-password login in an app. The `email` should correspond to an existing record in the `users` table. The `password` will be hashed ([using bcrypt](http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password)) and checked against the `password_digest` field of that user record. If they match, the Identity Provider will use the provided `nonce` to generate an [identity token](https://docs.layer.com/sdk/ios/authentication#identity-token) (the Identity Provider does not verify that the `nonce` is well-formed or valid). 
+The `POST /authenticate` endpoint expects three parameters: `email`, `password`, and `nonce`. This models a typical email-and-password login in an app. The `email` should correspond to an existing record in the `users` table. The `password` will be hashed ([using bcrypt](http://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html#method-i-has_secure_password)) and checked against the `password_digest` field of that user record. If they match, the Identity Provider will use the provided `nonce` to generate an [identity token](https://docs.layer.com/sdk/ios/authentication#identity-token) (the Identity Provider does not verify that the `nonce` is well-formed or valid).
 
-If the email and password are valid, the response looks like `{"identity_token": "<IDENTITY TOKEN AS A STRING>"}`. If not, the response will be `{"error": "<A DESCRIPTION OF THE ERROR>"}` and HTTP status `401`. 
+If the email and password are valid, the response looks like `{"identity_token": "<IDENTITY TOKEN AS A STRING>"}`. If not, the response will be `{"error": "<A DESCRIPTION OF THE ERROR>"}` and HTTP status `401`.
 
 # Deployment
 

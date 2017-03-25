@@ -15,7 +15,7 @@ class ServerAPI
   def create_identity(user_id, params)
     # params is a hash with keys corresponding to Layer Identity fields:
     # https://docs.layer.com/reference/server_api/identities.out#create-identity
-    resp = HTTParty.post("#{HOST}/apps/#{app_uuid}/users/#{user_id}/identity",
+    HTTParty.post("#{HOST}/apps/#{app_uuid}/users/#{user_id}/identity",
       body: params.to_json,
       headers: {
         'Accept' => 'application/vnd.layer+json; version=2.0',
@@ -23,7 +23,19 @@ class ServerAPI
         'Authorization' => "Bearer #{token}"
       }
     )
-    resp
+  end
+
+  def follow_users(originator_user_id, target_user_ids)
+    # https://docs.layer.com/reference/client_api/identities.out#follow-multiple-users
+    # Using Client API proxy: https://docs.layer.com/reference/server_api/clientapiproxy
+    HTTParty.post("#{HOST}/apps/#{app_uuid}/users/#{originator_user_id}/following/users",
+      body: target_user_ids.to_json,
+      headers: {
+        'Accept' => 'application/vnd.layer+json; version=2.0',
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{token}"
+      }
+    )
   end
 
   private

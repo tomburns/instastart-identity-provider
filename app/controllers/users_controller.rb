@@ -1,4 +1,5 @@
 require "#{Rails.root}/lib/server_api"
+require "#{Rails.root}/lib/following"
 
 class UsersController < ApplicationController
   before_action :check_login, except: [:new, :create]
@@ -31,6 +32,7 @@ class UsersController < ApplicationController
     params = params.merge(is_admin: true) unless app_has_admin?
     @user = User.create(params)
     ServerAPI.new.create_identity(@user.id, @user.as_identity)
+    Autofollow.establish_for_user(@user) if Autofollow.should_autofollow?
     redirect_to @user
   end
 

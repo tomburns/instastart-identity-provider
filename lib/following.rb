@@ -1,4 +1,5 @@
 require "#{Rails.root}/lib/server_api"
+require "parallel"
 
 class Following
   def self.create(originator, target)
@@ -23,6 +24,9 @@ class Autofollow
   def self.establish_for_user(user)
     user_id = user.kind_of?(String) ? user : user.id
     other_user_ids = User.all.pluck(:id).reject { |id| id == user_id }
+    # New user follow everyone else
     Following.create(user_id, other_user_ids)
+    # Everyone else follow new user
+    Parallel.each(other_user_ids) { |existing_id| Following.create(existing_id, user_id) }
   end
 end

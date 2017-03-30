@@ -114,7 +114,7 @@ class UsersControllerAuthenticatedTest < ActionDispatch::IntegrationTest
       times: 1
   end
 
-  test "POST /users automatically follows other users if there are only a few users in the database" do
+  test "POST /users automatically has new user follow other users if there are only a few users in the database" do
     user_1 = User.create(base_user_params.merge(email: 'user1@example.com'))
     post '/users', { params: { user: base_user_params }, headers: @auth_header }
     new_user_id = User.find_by(email: base_user_params[:email]).id

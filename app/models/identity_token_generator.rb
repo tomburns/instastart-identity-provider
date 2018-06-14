@@ -22,7 +22,7 @@ class IdentityTokenGenerator
   def identity_claim(user, nonce, expires_at)
     {
       iss: provider_id,
-      prn: user.id.to_s,
+      prn: 'customer-' + user.id.to_s,
       iat: Time.now.to_i,
       exp: expires_at.to_i,
       nce: nonce,
